@@ -5,8 +5,7 @@ import * as ElasticEmail from '@elasticemail/elasticemail-client';
 // const cron = require("node-cron");
 // const https = require('https');
 // const { log } = require("console");
-
-export const cronJob = () => {
+export default function handler(req, res) {
     try {
         https.get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_1fLlM624e08NlF90uo1wKFhPquRdQP4HUbuoti4r&currencies=INR%2CCAD&base_currency=EUR', (resp) => {
             let data = '';
