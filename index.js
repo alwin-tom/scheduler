@@ -5,7 +5,7 @@ const { log } = require("console");
 
 const app = express();
 
-cron.schedule("* */2 * * * *", function () {
+cron.schedule("*/1 * * * * *", function () {
     try {
         https.get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_1fLlM624e08NlF90uo1wKFhPquRdQP4HUbuoti4r&currencies=INR%2CCAD&base_currency=EUR', (resp) => {
             let data = '';
