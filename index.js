@@ -1,12 +1,10 @@
-const cron = require("node-cron");
-const express = require("express");
-const https = require('https');
-const { log } = require("console");
+import express from "express";
+// const express = require("express");
+import { cronJob } from './corn.js';
 
 const app = express();
-import { cron } from './corn.js';
 
-app.use('/cron', cron);
+app.use('/cron', cronJob);
 
 app.get("/home", () => {
     return "Home page"
