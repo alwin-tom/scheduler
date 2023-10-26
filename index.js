@@ -19,7 +19,7 @@ cron.schedule("0 */1 * * * *", function () {
             resp.on('end', () => {
                 console.log(JSON.parse(data));
                 let currencyDetails = JSON.parse(data).data;
-                if(currencyDetails.data.INR < 88.5) {
+                if(currencyDetails.INR < 88.5) {
                     console.log("Cancelling Email Job since rate is less than threshhold")
                     return;
                 }
