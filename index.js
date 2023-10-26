@@ -1,7 +1,7 @@
-const cron = require("node-cron");
-const express = require("express");
-const https = require('https');
-const { log } = require("console");
+import * as cron from 'node-cron';
+import * as https from 'https';
+import * as ElasticEmail from '@elasticemail/elasticemail-client';
+import express from "express";
 
 const app = express();
 
@@ -29,8 +29,6 @@ cron.schedule("*/1 * * * * *", function () {
                     }
                 }
                 content += "</tbody></table>";
-                let ElasticEmail = require('@elasticemail/elasticemail-client');
-
                 let defaultClient = ElasticEmail.ApiClient.instance;
 
                 let apikey = defaultClient.authentications['apikey'];
