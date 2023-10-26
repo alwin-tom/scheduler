@@ -7,7 +7,7 @@ const app = express();
 
 cron.schedule("0 */1 * * * *", function () {
     try {
-        https.get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_1fLlM624e08NlF90uo1wKFhPquRdQP4HUbuoti4r&currencies=INR%2CCAD&base_currency=EUR', (resp) => {
+        https.get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_1fLlM624e08NlF90uo1wKFhPquRdQP4HUbuoti4r&currencies=INR&base_currency=EUR', (resp) => {
             let data = '';
 
             // A chunk of data has been received.
@@ -19,6 +19,10 @@ cron.schedule("0 */1 * * * *", function () {
             resp.on('end', () => {
                 console.log(JSON.parse(data));
                 let currencyDetails = JSON.parse(data).data;
+                currencyDetails.data.INR = 82;
+                if(currencyDetails.data.INR < 88.5) {
+                    return;
+                }
                 let content = "<table class='styled-table' style='width: 50%; margin-left: 25% !important;border-collapse: collapse; margin: 25px 0; font-size: 0.9em; font-family: sans-serif; min-width: 400px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)'> <thead> <tr style='border-bottom: 1px solid #dddddd;background-color: #009879; color: #ffffff; text-align: center;'> <th style='padding: 12px 15px;'>Currency</th> <th style='padding: 12px 15px;'>Rate</th> </tr> </thead> <tbody>";
                 for (var key in currencyDetails) {
                     if (currencyDetails.hasOwnProperty(key)) {
